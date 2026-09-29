@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: payment
+    namespace: roboshop-dev
+    labels:
+        project: roboshop
+        tier: backend
+        service: payment
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            project: roboshop
+            tier: backend
+            service: payment
+    template:
+        metadata:
+            labels:
+                project: roboshop
+                tier: backend
+                service: payment
+        spec:
+            containers:
+              - name: payment
+                image: "{{ .Values.deployment.imageRepo }}:{{ .Values.deployment.imageVersion }}"
+                imagePullPolicy: Always
+                envFrom:
+                  - configMapRef:
+                        name: payment
+                livenessProbe:
+                    httpGet:
+                        path: /health
+                        port: 8080
+                    initialDelaySeconds: 30
+                    periodSeconds: 10
+                readinessProbe:
+                    httpGet:
+                        path: /health
+                        port: 8080
+                    initialDelaySeconds: 30
+                    periodSeconds: 10
+                    failureThreshold: 3
+                resources:
+                    limits:
+                        memory: "200Mi"
+                        cpu: "500m"
+                    requests:
+                        memory: "100Mi"
+                        cpu: "250m"

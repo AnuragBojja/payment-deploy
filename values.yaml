@@ -1,0 +1,3 @@
+deployment:
+  imageRepo: 793770371113.dkr.ecr.us-east-1.amazonaws.com/roboshop/payment
+  imageVersion: v1 
