@@ -8,10 +8,10 @@ metadata:
     service: payment 
     tier: backend
 data:
-  CART_HOST: {{ .Values.configmap.CART_HOST }}
-  CART_PORT: {{ .Values.configmap.CART_PORT }}
-  USER_HOST: {{ .Values.configmap.USER_HOST }}
-  USER_PORT: {{ .Values.configmap.USER_PORT }}
-  AMQP_HOST: {{ .Values.configmap.AMQP_HOST }}
-  AMQP_USER: {{ .Values.configmap.AMQP_USER }}
-  AMQP_PASS: {{ .Values.configmap.AMQP_PASS }}
+  CART_HOST: {{ .Values.configmap.CART_HOST | quote }}
+  CART_PORT: {{ .Values.configmap.CART_PORT | quote }}
+  USER_HOST: {{ .Values.configmap.USER_HOST | quote }}
+  USER_PORT: {{ .Values.configmap.USER_PORT | quote }}
+  AMQP_HOST: {{ .Values.configmap.AMQP_HOST | quote }}
+  AMQP_USER: {{ .Values.configmap.AMQP_USER | quote }}
+  AMQP_PASS: {{ .Values.configmap.AMQP_PASS | quote }}
